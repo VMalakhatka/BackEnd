@@ -14,16 +14,23 @@ public class Polinom {
         for (; startPolinom < endPolinom; ) {
             Element newElement = new Element();
             startPolinom = newElement.getElement(polinChar, startPolinom,  level);
+//            System.out.println(newElement.polinElement.toString().toUpperCase());
+//            String str=newElement.polinElement.toString().toUpperCase();
+//            if(str=="END"){
+//                System.out.println( newElement.polinElement.toString().toUpperCase() );
+//                return -1;
+//            }
             if(newElement.type!='b' & newElement.type !='(' & newElement.type !=')'){ polinomList.add(newElement);}
             else if(newElement.type =='(' ){
-                        System.out.println(newElement.type);
+//                        System.out.println(newElement.type);
                         Polinom subPolinom = new Polinom();
                         startPolinom = subPolinom.transfer(polinChar,startPolinom,endPolinom,level+1);
+//                        if (startPolinom==-1) return -1;
                         if(subPolinom.polinomList.get(0).type=='d'){
                             newElement.a=subPolinom.polinomList.get(0).a;
                             newElement.type='d';
                             polinomList.add(newElement);
-                            System.out.println("Субполином посчитали -  " + newElement.a);
+//                            System.out.println("Субполином посчитали -  " + newElement.a);
                         }else{
                             System.out.println("Во вложеном полиноме сбой");
                             newElement.a=subPolinom.polinomList.get(0).a;
@@ -37,18 +44,18 @@ public class Polinom {
         }
     }
     // это пока для диагностики печать
-    int ii;
-    printBlank(level);
-    System.out.println(level);
-    for (ii=0;ii<polinomList.size();ii+=1){
-        printBlank(level);
-        System.out.println("Kod - "+polinomList.get(ii).kod+"Element - " + polinomList.get(ii).polinElement + "  Type - " + polinomList.get(ii).type +" Operation - "+polinomList.get(ii).op);
-    }
-    System.out.println("расчет будет");
+//    int ii;
+//    printBlank(level);
+//    System.out.println(level);
+//    for (ii=0;ii<polinomList.size();ii+=1){
+//        printBlank(level);
+//        System.out.println("Kod - "+polinomList.get(ii).kod+"Element - " + polinomList.get(ii).polinElement + "  Type - " + polinomList.get(ii).type +" Operation - "+polinomList.get(ii).op);
+//    }
+//    System.out.println("расчет будет");
      if(calcPolinom()){
          printBlank(level);
          System.out.println("Ответ - " + polinomList.get(0).a);
-     }else{
+     } else{
          System.out.println("В полиноме сбой");
          polinomList.get(0).type='u';
      }
@@ -58,10 +65,14 @@ public class Polinom {
     boolean calcPolinom(){
         int i;
         // function made
-        System.out.println("Расчет начался");
+//        System.out.println("Расчет начался");
         if(polinomList.size()==1) return true;
             for (i = 0; i < polinomList.size(); i++) {
                 if (polinomList.get(i).type == 'f') {
+//                    if (polinomList.get(i).polinElement.toString().toUpperCase()=="END"){
+//                        polinomList.get(0).polinElement=polinomList.get(i).polinElement;
+//                        return false;
+//                    }
                     if (i == (polinomList.size() - 1)) {
                         System.out.println("No argument function - " + polinomList.get(i).polinElement);
                         return false;
@@ -86,7 +97,7 @@ public class Polinom {
             }
             //поиск самых приоритетных действий - это сейчас **
             for (i = 1; i < (polinomList.size()-2); i++) {
-                System.out.println("** Satrt");
+//                System.out.println("** Satrt");
                 if(polinomList.get(i).type=='z' & polinomList.get(i).op==42 & polinomList.get(i+1).op==42){
                     if (polinomList.get(i+2).type!='d'){
                         System.out.println("No argument 2 - ** ");
@@ -101,7 +112,7 @@ public class Polinom {
                 }
             }//поиск приоритетных действий - это сейчас * & /
             for (i = 1; i < (polinomList.size()-1); i++) {
-                System.out.println("* or / Satrt");
+//                System.out.println("* or / Satrt");
                 if(polinomList.get(i).type=='z' & (polinomList.get(i).op==42 | polinomList.get(i).op==47)){
                     if (polinomList.get(i+1).type!='d'){
                         System.out.println("No argument 2 - * or / ");
@@ -136,7 +147,7 @@ public class Polinom {
             }
             for (i = 0; i < (polinomList.size()-1);) {
                 if(polinomList.get(i).type!='d' & polinomList.get(i+1).type!='d'){
-                    System.out.println("Ну правильое выражение ");
+                    System.out.println("Не правильое выражение ");
                     return false;
                 }
                 polinomList.get(i).a+=polinomList.get(i+1).a;
