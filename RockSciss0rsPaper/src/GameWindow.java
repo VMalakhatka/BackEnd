@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
 public class GameWindow extends Frame {
-    private Color clrPlayer;
+    public Color clrPlayer;
     public Choice ch;
     public CheckboxGroup ChbGr;
     public Checkbox[] Cb;

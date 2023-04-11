@@ -5,6 +5,8 @@ public class RockSciss0rsPaper {
         GameWindow yellowPlayer = new GameWindow(50,100, 400,350, Color.YELLOW);
         GameWindow cyanPlayer = new GameWindow(600,100, 400,350, Color.CYAN);
         ResultDispl resultDispl_now = new ResultDispl(50,1000,350,700,Color.GRAY,yellowPlayer,cyanPlayer);
+        ComputerThread comp1 = new ComputerThread(yellowPlayer,resultDispl_now);
+        ComputerThread comp2 = new ComputerThread(cyanPlayer,resultDispl_now);
         try {
             while (true) {
                 resultDispl_now.addResult();
@@ -16,6 +18,6 @@ public class RockSciss0rsPaper {
                 resultDispl_now.addCount("fa \n  ");
             }
         }catch(InterruptedException e){ // Обработка исключения "прерывание потока"
-            System.out.println("Поток завершен!");}
+            resultDispl_now.addCount("\n Поток завершен! \n");}
     }
 }

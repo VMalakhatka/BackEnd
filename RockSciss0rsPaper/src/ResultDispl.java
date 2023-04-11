@@ -1,6 +1,12 @@
 import java.awt.*;
 
 public class ResultDispl extends Frame{
+    String[][] winResult = new String[][] {
+            {" Ничья", " Победил 1й игрок"," Победил 2й игрок"},
+            {" Победил 2й игрок"," Ничья"," Победил 1й игрок"},
+            {" Победил 1й игрок"," Победил 2й игрок", " Ничья"}
+    };
+    int winer=0;
     TextArea TA;
     GameWindow w1;
     GameWindow w2;
@@ -26,8 +32,23 @@ public class ResultDispl extends Frame{
     }
 
     void addResult(){
-        TA.append("\n Playr1 "+w1.Who+" Choose "+w1.ChbGr.getSelectedCheckbox().getLabel());
-        TA.append("   Playr2 "+w2.Who+" Choose "+w2.ChbGr.getSelectedCheckbox().getLabel()+"\n");
+        int pl1Index=0;
+        int pl2Index=0;
+        String pl1 = w1.ChbGr.getSelectedCheckbox().getLabel();
+        String pl2 = w2.ChbGr.getSelectedCheckbox().getLabel();
+        TA.append("\n Playr1 "+w1.Who+" Choose "+pl1);
+        TA.append("   Playr2 "+w2.Who+" Choose "+pl2);
+        if (pl1.equals("Rock")){
+            pl1Index=0;
+        } else if (pl1.equals("Scissors")) {
+            pl1Index=1;
+        }else pl1Index=2;
+        if (pl2.equals("Rock")){
+            pl2Index=0;
+        } else if (pl2.equals("Scissors")) {
+            pl2Index=1;
+        }else pl2Index=2;
+        TA.append(winResult[pl1Index][pl2Index]+"\n");
     }
 
     void addCount(String say){
