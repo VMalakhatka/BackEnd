@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class ResultDispl extends Frame{
+public class ResultDispl extends Frame {
     String[][] winResult = new String[][] {
             {" Ничья", " Победил 1й игрок"," Победил 2й игрок"},
             {" Победил 2й игрок"," Ничья"," Победил 1й игрок"},
@@ -8,11 +8,9 @@ public class ResultDispl extends Frame{
     };
     int winer=0;
     TextArea TA;
-    Client w1;
-    Client w2;
-    ResultDispl(int x, int y, int H, int W, Color clrWindow, Client w1,Client w2){
+    GameWindow w1;
+    ResultDispl(int x, int y, int H, int W, Color clrWindow, GameWindow w1){
         this.w1=w1;
-        this.w2=w2;
         setTitle("Результат игры");
         setBounds(x,y,W,H);
         setBackground(clrWindow);
@@ -25,7 +23,7 @@ public class ResultDispl extends Frame{
         TA.setBounds(5,5,W-10,H -10);
 // Область недоступна для редактирования:
         TA.setEditable(false);
-                ;
+        ;
 // Добавление текстовой области на панель справки:
         add(TA);
         setVisible(true);
@@ -34,16 +32,16 @@ public class ResultDispl extends Frame{
     void addResult(){
         int pl1Index=0;
         int pl2Index=0;
-        TA.append("\n Playr1 "+w1.Who+" Choose "+w1.ChbGr.substring(0));
-        TA.append("   Playr2 "+w2.Who+" Choose "+w2.ChbGr.substring(0));
-        if (w1.ChbGr.substring(0).equals("Rock")){
+        TA.append("\n Playr1 Choose "+w1.ChbGr.getSelectedCheckbox().getLabel());
+        TA.append("   Playr2 Choose "+w1.pl2);
+        if (w1.ChbGr.getSelectedCheckbox().getLabel().equals("Rock")){
             pl1Index=0;
-        } else if (w1.ChbGr.substring(0).equals("Scissors")) {
+        } else if (w1.ChbGr.getSelectedCheckbox().getLabel().equals("Scissors")) {
             pl1Index=1;
         }else pl1Index=2;
-        if (w2.ChbGr.substring(0).equals("Rock")){
+        if (w1.pl2.equals("Rock")){
             pl2Index=0;
-        } else if (w2.ChbGr.substring(0).equals("Scissors")) {
+        } else if (w1.pl2.equals("Scissors")) {
             pl2Index=1;
         }else pl2Index=2;
         TA.append(winResult[pl1Index][pl2Index]+"\n");

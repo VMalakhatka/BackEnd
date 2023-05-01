@@ -1,28 +1,26 @@
 import java.io.*;
-import java.net.ServerSocket;
 import java.net.Socket;
 
-public class Client implements Closeable {
+public class Client implements Cloneable {
     public BufferedWriter writer;
-    public StringBuffer ChbGr= new StringBuffer("New"); // curent Scissors Rock Paper
-    public String Who;
     public BufferedReader reader;
-    private Socket client;
-    public Client(Socket client){
-        this.client=client;
+    public Socket client;
+    public String answer="E";
+    public Client(String ip, int port){
         try {
+            this.client=new Socket(ip, port);
+            System.out.println("Client connect ip " + ip+" port "+port);
             reader=new BufferedReader(new InputStreamReader(client.getInputStream()));
             writer=new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Server not answer"+e);
+            this.close();
         }
-//        writeLine("Who");
-//        Who=readLine();
-//        whatchNow();
     }
-    void whatchNow(){
-        ChbGr.delete(0,ChbGr.length()).append(readLine());
-    }
+//    String whatchNow(){
+//       // writeLine("?");
+//        return readLine();
+//    }
     public void writeLine(String message) {
         try {
             writer.write(message);
@@ -51,3 +49,4 @@ public class Client implements Closeable {
     }
 
 }
+
